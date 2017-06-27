@@ -1,0 +1,13 @@
+.gradle/
+.idea/
+build/
+caches/
+/gradle/
+/native/
+/daemon/
+/wrapper/
+/gradlew
+/learn-java.iws
+/learn-java.ipr
+/learn-java.iml
+/gradlew.bat

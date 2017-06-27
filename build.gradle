@@ -1,0 +1,46 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'gradle-one-jar'
+
+mainClassName = 'learn.App'
+project.ext.dropwizardVersion = '1.1.1'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.github.rholder:gradle-one-jar:1.0.3'
+    }
+}
+
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven { url "http://nexus.qmino.com/content/repositories/miredot" }
+    maven { url 'http://nexus.qmino.com/content/repositories/miredot-snapshots' }
+    maven { url "http://tahseen.distributary.net/release/" }
+    maven { url "http://central.maven.org/maven2/" }
+}
+
+dependencies {
+    compile(
+            'io.dropwizard:dropwizard-core:' + dropwizardVersion,
+            'io.dropwizard:dropwizard-hibernate:' + dropwizardVersion,
+            'io.dropwizard:dropwizard-migrations:' + dropwizardVersion,
+            'io.dropwizard:dropwizard-auth:' + dropwizardVersion,
+    )
+    compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0'
+}
+
+
+
+task oneJar(type: OneJar) {
+    mainClass = mainClassName
+}
+
+run {
+    args 'server'
+}
