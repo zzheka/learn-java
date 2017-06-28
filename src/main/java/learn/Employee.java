@@ -3,12 +3,20 @@ package learn;
 /**
  * Created by eugen.beloded on 27.06.17.
  */
+
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 public class Employee {
 
-
     private Integer id;
+    @NotBlank @Length(min=2, max=255)
     private String firstName;
+    @NotBlank @Length(min=2, max=255)
     private String lastName;
+    @Pattern(regexp=".+@.+\\.[a-z]+")
     private String email;
 
     public Employee() {

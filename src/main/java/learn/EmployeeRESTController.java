@@ -52,8 +52,6 @@ public class EmployeeRESTController {
     public Response createEmployee(Employee employee) throws URISyntaxException {
         // validation
         Set<ConstraintViolation<Employee>> violations = validator.validate(employee);
-        System.out.println(employee);
-        System.out.println(violations);
 
         Employee e = EmployeeDB.getEmployee(employee.getId());
         System.out.println(e);
@@ -64,6 +62,9 @@ public class EmployeeRESTController {
             }
             return Response.status(Status.BAD_REQUEST).entity(validationMessages).build();
         }
+
+        EmployeeDB.addEmployee(employee);
+
         if (e != null) {
             EmployeeDB.updateEmployee(employee.getId(), employee);
             return Response.created(new URI("/employees/" + employee.getId()))
